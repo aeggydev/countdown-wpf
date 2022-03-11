@@ -10,7 +10,18 @@ namespace countdown;
 public class ViewModel : ViewModelBase
 {
     private readonly Model _model = new();
+    private bool _secondView = false;
 
+    public bool SecondView
+    {
+        get => _secondView;
+        set
+        {
+            _secondView = value;
+            OnPropertyChange(nameof(SecondView));
+            OnPropertyChange("_secondView");
+        }
+    }
     public Timer GetTimer()
     {
         var timer = new Timer();
