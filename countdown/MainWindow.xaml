@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:countdown"
         mc:Ignorable="d"
-        Title="Countdown" Height="200" Width="450">
+        Title="Countdown"
+        MinHeight="200" Height="200" Width="450" MinWidth="450">
     <Window.DataContext>
         <local:ViewModel />
     </Window.DataContext>

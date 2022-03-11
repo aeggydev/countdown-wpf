@@ -39,5 +39,6 @@ public partial class MainWindow : Window
 
     private void ButtonStart_OnClick(object sender, RoutedEventArgs e)
     {
+        ViewModel.GetTimer();
     }
 }

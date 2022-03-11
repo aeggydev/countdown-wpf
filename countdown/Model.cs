@@ -18,7 +18,7 @@ public class DoubleUpDown
 
     public int Number
     {
-        get => Int32.Parse(new string(FirstDigit, SecondDigit));
+        get => Int32.Parse(FirstDigit.ToString()+SecondDigit);
         set
         {
             var asString = value.ToString();
