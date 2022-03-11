@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text.RegularExpressions;
+using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -10,11 +11,16 @@ namespace countdown;
 /// </summary>
 public partial class MainWindow : Window
 {
+    public ViewModel ViewModel { get; set; }
     public MainWindow()
     {
+        ViewModel = new ViewModel();
         InitializeComponent();
+        DataContext = ViewModel;
     }
 
+    private Timer Timer { get; set; } = new Timer();
+    
     private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
     {
         var box = (TextBox)sender;

@@ -3,10 +3,14 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:countdown"
         mc:Ignorable="d"
         Title="Countdown" Height="200" Width="450">
+    <Window.DataContext>
+        <local:ViewModel />
+    </Window.DataContext>
     <StackPanel Height="200" Width="450">
-        <DockPanel Height="200" Width="450">
+        <DockPanel Height="0" Width="450">
             <StackPanel VerticalAlignment="Center">
                 <Label Content="00:00:00" FontSize="36" HorizontalAlignment="Center" VerticalAlignment="Center" />
                 <Button Content="Stop" FontSize="24" Width="Auto" HorizontalAlignment="Center" Padding="10,2"
@@ -32,18 +36,18 @@
                     </Style>
                 </Grid.Resources>
                 <WrapPanel HorizontalAlignment="Left" VerticalAlignment="Center">
-                    <TextBox Text="0" Style="{StaticResource NumberSelectorStyle}" />
-                    <TextBox Text="0" Style="{StaticResource NumberSelectorStyle}" />
+                    <TextBox Text="{Binding Path=Hours.FirstDigit}" Style="{StaticResource NumberSelectorStyle}" />
+                    <TextBox Text="{Binding Path=Hours.SecondDigit}" Style="{StaticResource NumberSelectorStyle}" />
                     <Label Content="hours" HorizontalAlignment="Left" VerticalAlignment="Top" />
                 </WrapPanel>
                 <WrapPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <TextBox Text="0" Style="{StaticResource NumberSelectorStyle}" />
-                    <TextBox Text="0" Style="{StaticResource NumberSelectorStyle}" />
+                    <TextBox Text="{Binding Path=Minutes.FirstDigit}" Style="{StaticResource NumberSelectorStyle}" />
+                    <TextBox Text="{Binding Path=Minutes.SecondDigit}" Style="{StaticResource NumberSelectorStyle}" />
                     <Label Content="minutes" HorizontalAlignment="Left" VerticalAlignment="Top" />
                 </WrapPanel>
                 <WrapPanel HorizontalAlignment="Right" VerticalAlignment="Center">
-                    <TextBox Text="0" Style="{StaticResource NumberSelectorStyle}" />
-                    <TextBox Text="0" Style="{StaticResource NumberSelectorStyle}" />
+                    <TextBox Text="{Binding Path=Seconds.FirstDigit}" Style="{StaticResource NumberSelectorStyle}" />
+                    <TextBox Text="{Binding Path=Seconds.SecondDigit}" Style="{StaticResource NumberSelectorStyle}" />
                     <Label Content="seconds" HorizontalAlignment="Left" VerticalAlignment="Center" />
                 </WrapPanel>
             </Grid>
