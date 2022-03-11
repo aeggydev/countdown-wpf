@@ -1,4 +1,6 @@
-﻿namespace countdown;
+﻿using System;
+
+namespace countdown;
 
 // TODO: Implement this in a concise way or scrap
 public class UpDown
@@ -13,25 +15,29 @@ public class DoubleUpDown
         Limit = limit;
     }
     public int Limit { get; init; }
-    public bool SetNumber(int number)
+
+    public int Number
     {
-        var asString = number.ToString();
-        if (number >= Limit)
+        get => Int32.Parse(new string(FirstDigit, SecondDigit));
+        set
         {
-            return false;
-        }
-        if (asString.Length > 2)
-        {
-            return false;
-        }
+            var asString = value.ToString();
+            if (value >= Limit)
+            {
+                // TODO: Handle overflow
+                Number = 0;
+                return;
+            }
 
-        if (asString.Length == 1)
-        {
-            asString = asString.PadLeft(2, '0');
-        }
+            asString = asString.Length switch
+            {
+                1 => asString.PadLeft(2, '0'),
+                2 => asString,
+                _ => throw new ArgumentOutOfRangeException($"{value} doesn't fit into limit of bigger than 0 and smaller than {Limit}")
+            };
 
-        (FirstDigit, SecondDigit) = (asString[0], asString[1]);
-        return true;
+            (FirstDigit, SecondDigit) = (asString[0], asString[1]);
+        }
     }
     public char FirstDigit { get; set; } = '0';
     public char SecondDigit { get; set; } = '0';
