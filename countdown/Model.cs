@@ -14,7 +14,7 @@ public class DoubleUpDown
     {
         Limit = limit;
     }
-    public int Limit { get; init; }
+    public int Limit { get; set; }
 
     public int Number
     {

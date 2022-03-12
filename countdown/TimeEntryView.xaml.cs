@@ -13,9 +13,9 @@ public partial class TimeEntryView : UserControl
     public TimeEntryView()
     {
         InitializeComponent();
-        ViewModel = (ViewModel?)DataContext!;
     }
-    public ViewModel ViewModel { get; set; }
+
+    private ViewModel? ViewModel => (ViewModel?)DataContext;
     
     private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
     {
@@ -35,10 +35,13 @@ public partial class TimeEntryView : UserControl
 
     private void ButtonStart_OnClick(object sender, RoutedEventArgs e)
     {
+        if (ViewModel == null) return;
+        
         MessageBox.Show(ViewModel.SecondView.ToString());
         ViewModel.SecondView = true;
         ViewModel.OnPropertyChange("SecondView");
         MessageBox.Show(ViewModel.SecondView.ToString());
+
         //ViewModel.GetTimer();
     }
 }

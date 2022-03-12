@@ -5,10 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:countdown"
              mc:Ignorable="d"
-             d:DesignHeight="200" d:DesignWidth="450">
-    <UserControl.DataContext>
-        <local:ViewModel />
-    </UserControl.DataContext>
+             d:DesignHeight="200" d:DesignWidth="450" d:DataContext="{d:DesignInstance local:ViewModel}">
     <Grid>
         <DockPanel Height="0" Width="450">
             <StackPanel VerticalAlignment="Center">

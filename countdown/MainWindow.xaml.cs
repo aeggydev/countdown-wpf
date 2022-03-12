@@ -14,9 +14,10 @@ public partial class MainWindow : Window
     public ViewModel ViewModel { get; set; }
     public MainWindow()
     {
-        ViewModel = new ViewModel();
         InitializeComponent();
-        DataContext = ViewModel;
+        ViewModel = (DataContext as ViewModel)!;
+        var timer = new System.Threading.Timer(_ => ViewModel.OnPropertyChange(nameof(ViewModel.SecondView)),
+            null, TimeSpan.Zero, TimeSpan.FromSeconds(2));
     }
 
     private Timer Timer { get; set; } = new Timer();
@@ -33,6 +34,7 @@ public partial class MainWindow : Window
 
     private void TextBox_GotFocus(object sender, RoutedEventArgs e)
     {
+        ViewModel.OnPropertyChange(nameof(ViewModel.SecondView));
         var box = (TextBox)sender;
         box.Dispatcher.BeginInvoke(new Action(() => box.SelectAll()));
     }

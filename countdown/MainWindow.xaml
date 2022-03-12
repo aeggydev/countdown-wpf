@@ -19,14 +19,14 @@
             <local:TimeEntryView DataContext="{Binding}" />
         </DataTemplate>
     </Window.Resources>
-    <ContentControl>
+    <ContentControl Content="{Binding}">
         <ContentControl.Style>
             <Style TargetType="ContentControl">
                 <Style.Triggers>
-                    <DataTrigger Binding="{Binding Path=SecondView}" Value="False">
+                    <DataTrigger Binding="{Binding SecondView}" Value="false">
                         <Setter Property="ContentTemplate" Value="{StaticResource TimeEntryView}" />
                     </DataTrigger>
-                    <DataTrigger Binding="{Binding Path=SecondView}" Value="True">
+                    <DataTrigger Binding="{Binding SecondView}" Value="True">
                         <Setter Property="ContentTemplate" Value="{StaticResource CountdownView}" />
                     </DataTrigger>
                 </Style.Triggers>
