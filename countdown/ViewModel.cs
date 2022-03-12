@@ -15,12 +15,7 @@ public class ViewModel : ViewModelBase
     public bool SecondView
     {
         get => _secondView;
-        set
-        {
-            _secondView = value;
-            OnPropertyChange(nameof(SecondView));
-            OnPropertyChange("_secondView");
-        }
+        set => SetProperty(ref _secondView, value);
     }
     public Timer GetTimer()
     {
@@ -60,12 +55,12 @@ public class ViewModelBase : INotifyPropertyChanged
     // This is probably useless
     public void OnPropertyChange(string propertyName) =>
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-    protected bool SetProperty<T>(ref T field, T newValue, [CallerMemberName]string propertyName = null)
+    protected bool SetProperty<T>(ref T field, T newValue, [CallerMemberName]string? propertyName = null)
     {
         if (EqualityComparer<T>.Default.Equals(field, newValue)) return false;
         
         field = newValue;
-        OnPropertyChange(propertyName);
+        if (propertyName != null) OnPropertyChange(propertyName);
         return true;
     }
 }
