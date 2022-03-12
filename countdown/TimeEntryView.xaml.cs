@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Text.RegularExpressions;
+using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
 using MessageBox = System.Windows.Forms.MessageBox;
@@ -34,7 +36,13 @@ public partial class TimeEntryView : UserControl
     private void ButtonStart_OnClick(object sender, RoutedEventArgs e)
     {
         if (ViewModel == null) return;
+
+        ViewModel.Timer = ViewModel.GetTimer();
+
+        ViewModel.Timer.Enabled = true;
+        ViewModel.RefreshTimer.Enabled = true;
         ViewModel.ShowCountdown = true;
+        ViewModel.Stopwatch = Stopwatch.StartNew();
 
         //ViewModel.GetTimer();
     }

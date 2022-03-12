@@ -46,7 +46,6 @@ public class DoubleUpDown
 public class Model
 {
     public bool ShowCountdown = false;
-    public Timer? Timer = null;
     public DoubleUpDown Hours { get; set; } = new(100);
     public DoubleUpDown Minutes { get; set; } = new(60);
     public DoubleUpDown Seconds { get; set; } = new(60);

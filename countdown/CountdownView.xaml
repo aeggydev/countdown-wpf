@@ -5,8 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:countdown"
              mc:Ignorable="d"
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="300" d:DesignWidth="300" d:DataContext="{d:DesignInstance local:ViewModel}">
     <Grid>
-        <Button></Button>
+        <Label Content="{Binding Path=CountdownText}">
+        </Label>
     </Grid>
 </UserControl>
