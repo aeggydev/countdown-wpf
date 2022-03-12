@@ -12,8 +12,9 @@
                 <Style x:Key="NumberSelectorStyle" TargetType="TextBox">
                     <Setter Property="TextWrapping" Value="Wrap" />
                     <Setter Property="Margin" Value="0,0,5,0" />
-                    <EventSetter Event="GotFocus" Handler="TextBox_GotFocus" />
-                    <EventSetter Event="TextChanged" Handler="TextBox_TextChanged" />
+                    <EventSetter Event="GotFocus" Handler="EnsureSelectedFocus" />
+                    <EventSetter Event="PreviewTextInput" Handler="TextBox_TextChanged" />
+                    <EventSetter Event="SelectionChanged" Handler="SelectionChangedHandler" HandledEventsToo="False" />
                     <Setter Property="HorizontalAlignment" Value="Left" />
                     <Setter Property="VerticalAlignment" Value="Center" />
                     <Setter Property="FontSize" Value="22" />

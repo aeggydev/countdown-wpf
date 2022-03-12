@@ -18,24 +18,22 @@ public partial class TimeEntryView : UserControl
 
     private ViewModel? ViewModel => (ViewModel?)DataContext;
     
-    private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+    private void TextBox_TextChanged(object sender, TextCompositionEventArgs textCompositionEventArgs)
     {
         var box = (TextBox)sender;
         if (Regex.IsMatch(box.Text, "[^0-9]"))
         {
             box.Text = "0";
-            TextBox_GotFocus(sender, null);
-        }
-        else
-        {
-            box.MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
         }
     }
 
-    private void TextBox_GotFocus(object sender, RoutedEventArgs e)
+    private void EnsureSelectedFocus(object sender, RoutedEventArgs e)
     {
         var box = (TextBox)sender;
-        box.Dispatcher.BeginInvoke(new Action(() => box.SelectAll()));
+        box.Focus();
+        box.SelectAll();
+        e.Handled = true;
+        // box.Dispatcher.BeginInvoke(new Action(() => box.SelectAll()));
     }
 
     private void ButtonStart_OnClick(object sender, RoutedEventArgs e)
@@ -48,5 +46,16 @@ public partial class TimeEntryView : UserControl
         ViewModel.RefreshTimer.Enabled = true;
         ViewModel.Stopwatch.Restart();
         ViewModel.ShowCountdown = true;
+    }
+
+    private void SelectionChangedHandler(object sender, RoutedEventArgs e)
+    {
+        var box = sender as TextBox;
+        if (box?.SelectionLength == 0 && !e.Handled)
+        {
+            box.SelectAll();
+        }
+
+        e.Handled = true;
     }
 }
