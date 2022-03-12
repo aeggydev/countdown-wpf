@@ -11,12 +11,11 @@ namespace countdown;
 /// </summary>
 public partial class MainWindow : Window
 {
-    public ViewModel ViewModel { get; set; }
+    public ViewModel? ViewModel => DataContext as ViewModel;
     public MainWindow()
     {
         InitializeComponent();
-        ViewModel = (DataContext as ViewModel)!;
-        var timer = new System.Threading.Timer(_ => ViewModel.OnPropertyChange(nameof(ViewModel.SecondView)),
+        var timer = new System.Threading.Timer(_ => ViewModel?.OnPropertyChange(nameof(ViewModel.SecondView)),
             null, TimeSpan.Zero, TimeSpan.FromSeconds(2));
     }
 
@@ -34,13 +33,13 @@ public partial class MainWindow : Window
 
     private void TextBox_GotFocus(object sender, RoutedEventArgs e)
     {
-        ViewModel.OnPropertyChange(nameof(ViewModel.SecondView));
+        ViewModel?.OnPropertyChange(nameof(ViewModel.SecondView));
         var box = (TextBox)sender;
         box.Dispatcher.BeginInvoke(new Action(() => box.SelectAll()));
     }
 
     private void ButtonStart_OnClick(object sender, RoutedEventArgs e)
     {
-        ViewModel.GetTimer();
+        ViewModel?.GetTimer();
     }
 }
