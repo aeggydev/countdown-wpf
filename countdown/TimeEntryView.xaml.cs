@@ -41,14 +41,12 @@ public partial class TimeEntryView : UserControl
     private void ButtonStart_OnClick(object sender, RoutedEventArgs e)
     {
         if (ViewModel == null) return;
-
-        ViewModel.Timer = ViewModel.GetTimer();
-
+        
+        ViewModel.SetTimer();
+        
         ViewModel.Timer.Enabled = true;
         ViewModel.RefreshTimer.Enabled = true;
+        ViewModel.Stopwatch.Restart();
         ViewModel.ShowCountdown = true;
-        ViewModel.Stopwatch = Stopwatch.StartNew();
-
-        //ViewModel.GetTimer();
     }
 }

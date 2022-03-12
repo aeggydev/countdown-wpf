@@ -18,32 +18,39 @@ public class ViewModel : ViewModelBase
 
     public ViewModel()
     {
+        Stopwatch = new Stopwatch();
+
         RefreshTimer = new Timer();
-        RefreshTimer.Interval = 500;
+        RefreshTimer.Interval = 10;
         RefreshTimer.Elapsed += (_, _) => OnPropertyChange(nameof(CountdownText));
-        
+
         ResetCountdownCommand = new DelegateCommand(_ =>
         {
-            Stopwatch = null;
+            Stopwatch.Reset();
             RefreshTimer.Enabled = false;
             ShowCountdown = false;
         });
+        
+        Timer = new Timer();
+        Timer.AutoReset = false;
+        Timer.Elapsed += (_, _) =>
+        {
+            Timer.Enabled = false;
+            ResetCountdownCommand.Execute(null);
+        };
     }
-    public Timer GetTimer()
+    public void SetTimer()
     {
-        var timer = new Timer();
         // Calculate total in milliseconds
-        timer.Interval = ((Hours.Number * 60 * 60 + Minutes.Number * 60 + Seconds.Number) * 1000) switch
+        Timer.Interval = ((Hours.Number * 60 * 60 + Minutes.Number * 60 + Seconds.Number) * 1000) switch
         {
             < 1 => 1,
             var x => x
         };
-        timer.Elapsed += (_, _) => ResetCountdownCommand.Execute(null);
-        return timer;
     }
 
-    public Timer? Timer { get; set; } = null;
-    public Stopwatch? Stopwatch { get; set; } = null;
+    public Timer Timer { get; }
+    public Stopwatch Stopwatch { get; }
     public readonly Timer RefreshTimer;
 
     public bool ShowCountdown
