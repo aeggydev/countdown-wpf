@@ -11,7 +11,7 @@ namespace countdown;
 /// </summary>
 public partial class MainWindow : Window
 {
-    public ViewModel? ViewModel => DataContext as ViewModel;
+    private ViewModel? ViewModel => DataContext as ViewModel;
     public MainWindow()
     {
         InitializeComponent();
