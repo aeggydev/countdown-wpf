@@ -4,6 +4,7 @@ using System.Text.RegularExpressions;
 using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using MessageBox = System.Windows.Forms.MessageBox;
 
 namespace countdown;
@@ -24,6 +25,10 @@ public partial class TimeEntryView : UserControl
         {
             box.Text = "0";
             TextBox_GotFocus(sender, null);
+        }
+        else
+        {
+            box.MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
         }
     }
 
