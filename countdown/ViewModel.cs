@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Timers;
+using System.Windows.Input;
 using MessageBox = System.Windows.Forms.MessageBox;
 
 namespace countdown;
@@ -10,13 +11,6 @@ namespace countdown;
 public class ViewModel : ViewModelBase
 {
     private readonly Model _model = new();
-    private bool _secondView = false;
-
-    public bool SecondView
-    {
-        get => _secondView;
-        set => SetProperty(ref _secondView, value);
-    }
     public Timer GetTimer()
     {
         var timer = new Timer();
@@ -30,6 +24,12 @@ public class ViewModel : ViewModelBase
         return timer;
     }
 
+    public bool ShowCountdown
+    {
+        get => _model.ShowCountdown;
+        set => SetProperty(ref _model.ShowCountdown, value);
+    }
+    
     // TODO: Make notify about changed property
     public DoubleUpDown Hours
     {

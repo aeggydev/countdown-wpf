@@ -23,10 +23,10 @@
         <ContentControl.Style>
             <Style TargetType="ContentControl">
                 <Style.Triggers>
-                    <DataTrigger Binding="{Binding SecondView}" Value="false">
+                    <DataTrigger Binding="{Binding ShowCountdown}" Value="False">
                         <Setter Property="ContentTemplate" Value="{StaticResource TimeEntryView}" />
                     </DataTrigger>
-                    <DataTrigger Binding="{Binding SecondView}" Value="True">
+                    <DataTrigger Binding="{Binding Path=ShowCountdown}" Value="True">
                         <Setter Property="ContentTemplate" Value="{StaticResource CountdownView}" />
                     </DataTrigger>
                 </Style.Triggers>

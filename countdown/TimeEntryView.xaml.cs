@@ -1,6 +1,4 @@
 ﻿using System;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
@@ -36,11 +34,7 @@ public partial class TimeEntryView : UserControl
     private void ButtonStart_OnClick(object sender, RoutedEventArgs e)
     {
         if (ViewModel == null) return;
-        
-        MessageBox.Show(ViewModel.SecondView.ToString());
-        ViewModel.SecondView = true;
-        ViewModel.OnPropertyChange("SecondView");
-        MessageBox.Show(ViewModel.SecondView.ToString());
+        ViewModel.ShowCountdown = true;
 
         //ViewModel.GetTimer();
     }
